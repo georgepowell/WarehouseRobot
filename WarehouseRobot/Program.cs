@@ -95,7 +95,6 @@ namespace WarehouseRobot
             string[] parts = robotPos.Split(' ');
             int x = 0;
             int y = 0;
-            Direction d = Direction.North;
 
             bool failed = !(parts.Length == 3 &&
                 Int32.TryParse(parts[0], out x) &&
