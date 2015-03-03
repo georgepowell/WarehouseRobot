@@ -13,7 +13,7 @@ namespace UnitTests
         [TestMethod]
         public void ExampleTest()
         {
-            Assert.AreEqual(Program.InputOutput(input.Split('\n')), output);
+            Assert.AreEqual(Program.RobotWarehouseIO(input.Split('\n')), output);
         }
     }
 }

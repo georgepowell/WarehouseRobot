@@ -10,7 +10,7 @@ namespace WarehouseRobot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(InputOutput(ConsoleInput()));
+            Console.WriteLine(RobotWarehouseIO(ConsoleInput()));
 
             Console.ReadLine();
         }
@@ -21,7 +21,12 @@ namespace WarehouseRobot
                 yield return Console.ReadLine();
         }
 
-        public static string InputOutput(IEnumerable<string> input)
+        /// <summary>
+        /// Creates a configuration of robots from the input, then returns a string output representing where the robots are after following their instructions. The input is interpretted as a sequence of strings each on a new line.
+        /// </summary>
+        /// <param name="input">An enumerable sequence of input strings. Each new string is interpretted to be on a new line.</param>
+        /// <returns>The output of the program, given the input.</returns>
+        public static string RobotWarehouseIO(IEnumerable<string> input)
         {
             var inputEnumerator = input.GetEnumerator();
             string output = "";
