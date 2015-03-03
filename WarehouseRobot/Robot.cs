@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace WarehouseRobot
 {
+    /// <summary>
+    /// Represents a Robot's state within the warehouse (Location + Direction).
+    /// Methods exist to move and rotate the robot.
+    /// </summary>
     public class Robot
     {
-        public Location Location { get; set; }
+        public IntVector2D Location { get; set; }
 
         public Direction Direction { get; set; }
 
         public Robot(int x, int y, Direction direction)
-            : this(new Location(x, y), direction) { }
+            : this(new IntVector2D(x, y), direction) { }
 
-        public Robot(Location location, Direction direction)
+        public Robot(IntVector2D location, Direction direction)
         {
             this.Location = location;
             this.Direction = direction;
@@ -23,7 +27,7 @@ namespace WarehouseRobot
         
         public void MoveForward()
         {
-            Location += Location.DirectionUnits[Direction];
+            Location += IntVector2D.DirectionUnit(Direction);
         }
 
         public void RotateClockwise()
@@ -36,6 +40,9 @@ namespace WarehouseRobot
             Direction = (Direction)((int)(Direction + 3) % 4);
         }
 
+        /// <summary>
+        /// Alternative to the other public methods, robots can be controlled with instructions.
+        /// </summary>
         public void Execute(Instruction instruction)
         {
             switch (instruction)

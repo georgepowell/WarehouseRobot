@@ -15,6 +15,9 @@ namespace WarehouseRobot
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Returns the console input line by line as an IEnumerable
+        /// </summary>
         public static IEnumerable<string> ConsoleInput()
         {
             while (true)
@@ -31,21 +34,21 @@ namespace WarehouseRobot
             var inputEnumerator = input.GetEnumerator();
             string output = "";
 
-            string northEastIn = inputEnumerator.ReadCurrent();
+            string northEastIn = inputEnumerator.ReadNext();
 
-            Location northEast = locationFromString(northEastIn);
+            IntVector2D northEast = locationFromString(northEastIn);
             RobotSquad squad = new RobotSquad(northEast);
 
             for (; ; )
             {
-                string robotIn = inputEnumerator.ReadCurrent();
+                string robotIn = inputEnumerator.ReadNext();
 
                 // An empty line for robot position indicates end of input
                 if (String.IsNullOrEmpty(robotIn))
                     break;
 
                 var robot = robotFromString(robotIn);
-                string instructionsIn = inputEnumerator.ReadCurrent();
+                string instructionsIn = inputEnumerator.ReadNext();
                 var instructions = instructionsFromString(instructionsIn);
 
                 squad.AddRobotInstruction(robot, instructions);
@@ -74,7 +77,7 @@ namespace WarehouseRobot
             { "W", Direction.West }
         };
 
-        static Location locationFromString(string pos)
+        static IntVector2D locationFromString(string pos)
         {
             string[] parts = pos.Split(' ');
             int x = 0;
@@ -87,7 +90,7 @@ namespace WarehouseRobot
             if (failed)
                 throw new ArgumentException("pos needs to be two integers seperated by spaces e.g. \"1 2\"");
             else
-                return new Location(x, y);
+                return new IntVector2D(x, y);
         }
 
         static Robot robotFromString(string robotPos)
